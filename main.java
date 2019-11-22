@@ -23,10 +23,10 @@ public class main {
 	static int labelc=0;
 	private static ArrayList<dn> myArrayList;
     public static void main(String[] args) throws InterruptedException {
-	JFrame f = new JFrame("¡ÿ's ∞‘¿” ");
+	JFrame f = new JFrame("Ï§Ä's Í≤åÏûÑ ");
 	ImageIcon p =new ImageIcon("C:/Users/user/Desktop/grr.png");
 	JLabel player =  new JLabel(p);
-	ArrayList<JLabel> bulJ = new ArrayList<>(); // label ¡§∫∏∏¶
+	ArrayList<JLabel> bulJ = new ArrayList<>(); // label Ï†ïÎ≥¥Î•º
 	ArrayList<bullet> bulI = new ArrayList<>();
 	ArrayList<dn> d =new ArrayList<>();
 	
@@ -37,9 +37,9 @@ public class main {
 	player.setBounds(px, py, p.getIconWidth(), p.getIconHeight());
 	
 	f.setLayout(null);
-	f.setSize(600,600); //≈©±‚
+	f.setSize(600,600); //ÌÅ¨Í∏∞
 	f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
-	f.setVisible(true);//ª˝º∫
+	f.setVisible(true);//ÏÉùÏÑ±
 	
 	myArrayList=new ArrayList<dn>();
 	
@@ -83,13 +83,28 @@ public class main {
 		px+=set;
 		bulJ.clear();
 		labelc=0;
-		for(bullet k : bulI)
-		{
-			if(k.getPy()>550) {
-				bulI.remove(k);
-				break;
-			}
+	for(bullet k : bulI)
+	{
+            if((p.getPx()<k.getPx()&& k.getPx()<p.getPx()+p.getImg().getIconWidth()) && (k.getPy()>p.getPy()&&p.getPy+p.getImg().getIconHeight()>k.getPy()))
+            {
+                f.setVisible(true);//ÏÉùÏÑ±
+		        f.revalidate();
+                f.repaint();
+                JLabel a =new JLabel();
+                a.setSize(100,100);
+                a.setBounds(250,250,300,300);
+                a.setText("END");
+                f.add(a);
+                f.setVisible(true);//ÏÉùÏÑ±
+		        f.revalidate();
+                f.repaint();
+                Thread.sleep(100000); //Ï¢ÖÎ£åÎ¨∏ÏúºÎ°ú Î∞îÍæ∏Í∏∞
+            }
+		if(k.getPy()>550) {
+			bulI.remove(k);
+			break;
 		}
+	}
 		
 		for(bullet k : bulI)
 		{
@@ -103,7 +118,7 @@ public class main {
 		player.setSize(p.getIconWidth(), p.getIconHeight());
 		player.setBounds(px, py, p.getIconWidth(), p.getIconHeight());
 		f.add(player);
-		f.setVisible(true);//ª˝º∫
+		f.setVisible(true);//ÏÉùÏÑ±
 		f.revalidate();
 		f.repaint();
 		Thread.sleep(50);
