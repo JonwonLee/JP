@@ -20,6 +20,11 @@ public class bullet {
 		return this.speed;
 	}
 	
+	public void setSpeed(int speed)
+	{
+		return this.speed=speed;
+	}
+	
 	public void setPx(int x)
 	{
 		this.px=x;
