@@ -27,7 +27,7 @@ public class main {
 	ImageIcon p =new ImageIcon("C:/Users/user/Desktop/grr.png");
 	JLabel player =  new JLabel(p);
 	ArrayList<JLabel> bulJ = new ArrayList<>(); // label 정보를
-	ArrayList<bullet> bulI = new ArrayList<>();
+	ArrayList<bullet> bulI = new ArrayList<>();  //bullet 을 arraylist로 쓴 이유: 랜덤을로 총알이 떨어지니까 가변적으로  배열에 넣기 위해서
 	ArrayList<dn> d =new ArrayList<>();
 	
 	int px=300;
@@ -83,9 +83,9 @@ public class main {
 		px+=set;
 		bulJ.clear();
 		labelc=0;
-	for(bullet k : bulI)
+	for(bullet k : bulI) //BulI에 있는  값들을 하나씩 bullet k에 대입
 	{
-            if((p.getPx()<k.getPx()&& k.getPx()<p.getPx()+p.getImg().getIconWidth()) && (k.getPy()>p.getPy()&&p.getPy+p.getImg().getIconHeight()>k.getPy()))
+            if((player.getX()<k.getPx()&& k.getPx()<player.getX()+player.getIcon().getIconWidth()) && (k.getPy()>player.getY()&&player.getY()+player.getIcon().getIconHeight()>k.getPy()))
             {
                 f.setVisible(true);//생성
 		        f.revalidate();
@@ -93,7 +93,7 @@ public class main {
                 JLabel a =new JLabel();
                 a.setSize(100,100);
                 a.setBounds(250,250,300,300);
-                a.setText("END");
+                a.setText("GAME OVER");
                 f.add(a);
                 f.setVisible(true);//생성
 		        f.revalidate();
@@ -131,4 +131,3 @@ public class main {
 	}
     }
 }
-
