@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
@@ -21,11 +22,16 @@ public class main {
 	static int set=0;
 	static int sec=0;
 	static int labelc=0;
+	static int score=0;
 	private static ArrayList<dn> myArrayList;
     public static void main(String[] args) throws InterruptedException {
 	JFrame f = new JFrame("준's 게임 ");
-	ImageIcon p =new ImageIcon("C:/Users/user/Desktop/grr.png");
+	ImageIcon p =new ImageIcon("C:/Users/이준원/Desktop/grr.png");
 	JLabel player =  new JLabel(p);
+	JLabel score= new JLabel("Score: ");
+	f.add(score);
+	f.pack();
+	f.setVisible(true);
 	ArrayList<JLabel> bulJ = new ArrayList<>(); // label 정보를
 	ArrayList<bullet> bulI = new ArrayList<>();  //bullet 을 arraylist로 쓴 이유: 랜덤을로 총알이 떨어지니까 가변적으로  배열에 넣기 위해서
 	ArrayList<dn> d =new ArrayList<>();
