@@ -1,36 +1,32 @@
 package project;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
-import java.util.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class main {
 	static int set=0;
 	static int sec=0;
 	static int labelc=0;
-	static int score=0;
+	static int nscore=0;
+	static int lives1=5;
 	private static ArrayList<dn> myArrayList;
     public static void main(String[] args) throws InterruptedException {
 	JFrame f = new JFrame("준's 게임 ");
-	ImageIcon p =new ImageIcon("C:/Users/이준원/Desktop/grr.png");
+	ImageIcon p =new ImageIcon("C:/Users/user/Desktop/grr.png");
 	JLabel player =  new JLabel(p);
-	JLabel score= new JLabel("Score: ");
+	JLabel score= new JLabel("Score:"+Integer.toString(nscore));
+	JLabel lives= new JLabel("lives:"+Integer.toString(lives1));
+	score.setBounds(0, 0, 100, 100);
 	f.add(score);
-	f.pack();
+	
+	lives.setBounds(200, 0, 350, 350);
+	f.add(lives);
+	
 	f.setVisible(true);
 	ArrayList<JLabel> bulJ = new ArrayList<>(); // label 정보를
 	ArrayList<bullet> bulI = new ArrayList<>();  //bullet 을 arraylist로 쓴 이유: 랜덤을로 총알이 떨어지니까 가변적으로  배열에 넣기 위해서
@@ -93,21 +89,24 @@ public class main {
 	{
             if((player.getX()<k.getPx()&& k.getPx()<player.getX()+player.getIcon().getIconWidth()) && (k.getPy()>player.getY()&&player.getY()+player.getIcon().getIconHeight()>k.getPy()))
             {
-                f.setVisible(true);//생성
-		        f.revalidate();
-                f.repaint();
-                JLabel a =new JLabel();
-                a.setSize(100,100);
+                lives1--;
+                lives.setText("life : "+Integer.toString(lives1));
+                /*a.setSize(100,100);
                 a.setBounds(250,250,300,300);
                 a.setText("GAME OVER");
                 f.add(a);
                 f.setVisible(true);//생성
 		        f.revalidate();
                 f.repaint();
-                Thread.sleep(100000); //종료문으로 바꾸기
+                */
+                if (lives1==0)
+                	Thread.sleep(100000); //종료문으로 바꾸기
             }
+            
 		if(k.getPy()>550) {
 			bulI.remove(k);
+			nscore++;
+			score.setText("score : "+Integer.toString(nscore));
 			break;
 		}
 	}
@@ -136,4 +135,12 @@ public class main {
 		f.remove(player);
 	}
     }
+	private static String integerate(int nscore2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private static String string(int nscore2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
