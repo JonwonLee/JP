@@ -28,7 +28,7 @@ public class main {
 	f.add(lives);
 	
 	f.setVisible(true);
-	ArrayList<JLabel> bulJ = new ArrayList<>(); // label 정보를
+	ArrayList<JLabel> bulJ = new ArrayList<>(); // bullet 이라는 클래스저장한것을 JLabel로 표현하기 위해서 생성
 	ArrayList<bullet> bulI = new ArrayList<>();  //bullet 을 arraylist로 쓴 이유: 랜덤을로 총알이 떨어지니까 가변적으로  배열에 넣기 위해서
 	ArrayList<dn> d =new ArrayList<>();
 	
@@ -39,7 +39,6 @@ public class main {
 	player.setBounds(px, py, p.getIconWidth(), p.getIconHeight());
 	
 	f.setLayout(null);
-	f.setSize(600,600); //크기
 	f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
 	f.setVisible(true);//생성
 	
@@ -87,23 +86,27 @@ public class main {
 		labelc=0;
 	for(bullet k : bulI) //BulI에 있는  값들을 하나씩 bullet k에 대입
 	{
+			//사람하고 총알이 부딛쳤을때 
             if((player.getX()<k.getPx()&& k.getPx()<player.getX()+player.getIcon().getIconWidth()) && (k.getPy()>player.getY()&&player.getY()+player.getIcon().getIconHeight()>k.getPy()))
             {
                 lives1--;
-                lives.setText("life : "+Integer.toString(lives1));
-                /*a.setSize(100,100);
-                a.setBounds(250,250,300,300);
-                a.setText("GAME OVER");
-                f.add(a);
-                f.setVisible(true);//생성
-		        f.revalidate();
-                f.repaint();
-                */
-                if (lives1==0)
+				if (lives1==0) 
+				{
+					JLabel a=new JLabel();
+                	a.setSize(100,100);
+                	a.setBounds(250,250,300,300);
+                	a.setText("GAME OVER");
+                	f.add(a);
+                	f.setVisible(true);//생성
+                	f.revalidate();
+                	f.repaint();
                 	Thread.sleep(100000); //종료문으로 바꾸기
+				}
             }
             
-		if(k.getPy()>550) {
+        //점수 증가시키는거     
+		if(k.getPy()>550) 
+		{
 			bulI.remove(k);
 			nscore++;
 			score.setText("score : "+Integer.toString(nscore));
@@ -111,7 +114,7 @@ public class main {
 		}
 	}
 		
-		for(bullet k : bulI)
+		for(bullet k : bulI)//BulI에 있는 값들을 하나식 bullet k에 대입
 		{
 			bulJ.add(new JLabel(k.getImg()));
 			bulJ.get(labelc).setSize(k.getImg().getIconWidth(),k.getImg().getIconHeight());
@@ -122,6 +125,8 @@ public class main {
 		}
 		player.setSize(p.getIconWidth(), p.getIconHeight());
 		player.setBounds(px, py, p.getIconWidth(), p.getIconHeight());
+		lives.setText("life : "+Integer.toString(lives1));
+		f.add(lives);
 		f.add(player);
 		f.setVisible(true);//생성
 		f.revalidate();
