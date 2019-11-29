@@ -2,11 +2,15 @@ package project;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import org.omg.CORBA.portable.OutputStream;
 
 public class main {
 	static int set=0;
@@ -17,7 +21,7 @@ public class main {
 	private static ArrayList<dn> myArrayList;
     public static void main(String[] args) throws InterruptedException {
 	JFrame f = new JFrame("준's 게임 ");
-	ImageIcon p =new ImageIcon("C:/Users/user/Desktop/grr.png");
+	ImageIcon p =new ImageIcon("C:/Users/이준원/Desktop/grr.png");
 	JLabel player =  new JLabel(p);
 	JLabel score= new JLabel("Score:"+Integer.toString(nscore));
 	JLabel lives= new JLabel("lives:"+Integer.toString(lives1));
@@ -92,6 +96,18 @@ public class main {
                 lives1--;
 				if (lives1==0) 
 				{
+					//파일 저장
+                	try 
+                	{
+                		FileOutputStream output = new FileOutputStream("C:/Users/이준원/Desktop/JAVASCORE");
+                		String str = Integer.toString(nscore);
+                		byte[] by = str.getBytes();
+                		output.write(by);
+                		output.close();
+                	}
+                	catch(Exception e){
+                		e.getStackTrace();
+                	}
 					JLabel a=new JLabel();
                 	a.setSize(100,100);
                 	a.setBounds(250,250,300,300);
@@ -112,6 +128,7 @@ public class main {
 			score.setText("score : "+Integer.toString(nscore));
 			break;
 		}
+
 	}
 		
 		for(bullet k : bulI)//BulI에 있는 값들을 하나식 bullet k에 대입
