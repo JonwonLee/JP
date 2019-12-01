@@ -2,15 +2,14 @@ package project;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import org.omg.CORBA.portable.OutputStream;
 
 public class main {
 	static int set=0;
@@ -18,10 +17,14 @@ public class main {
 	static int labelc=0;
 	static int nscore=0;
 	static int lives1=5;
+	
 	private static ArrayList<dn> myArrayList;
+	
     public static void main(String[] args) throws InterruptedException {
 	JFrame f = new JFrame("준's 게임 ");
-	ImageIcon p =new ImageIcon("C:/Users/이준원/Desktop/grr.png");
+	
+	ImageIcon p =new ImageIcon("C:/Users/User/Desktop/grr.png");
+	
 	JLabel player =  new JLabel(p);
 	JLabel score= new JLabel("Score:"+Integer.toString(nscore));
 	JLabel lives= new JLabel("lives:"+Integer.toString(lives1));
@@ -43,7 +46,7 @@ public class main {
 	player.setBounds(px, py, p.getIconWidth(), p.getIconHeight());
 	
 	f.setLayout(null);
-	f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
+	f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);  
 	f.setVisible(true);//생성
 	
 	myArrayList=new ArrayList<dn>();
@@ -60,7 +63,7 @@ public class main {
            @Override
            public void keyPressed(KeyEvent e) {
         	   if(e.getKeyCode() ==KeyEvent.VK_RIGHT)
-               {
+               { 
              	  set=+10;
                }
                else if(e.getKeyCode() ==KeyEvent.VK_LEFT)
@@ -88,25 +91,27 @@ public class main {
 		px+=set;
 		bulJ.clear();
 		labelc=0;
+		
 	for(bullet k : bulI) //BulI에 있는  값들을 하나씩 bullet k에 대입
 	{
 			//사람하고 총알이 부딛쳤을때 
-            if((player.getX()<k.getPx()&& k.getPx()<player.getX()+player.getIcon().getIconWidth()) && (k.getPy()>player.getY()&&player.getY()+player.getIcon().getIconHeight()>k.getPy()))
+            if((player.getX()<k.getPx()&& k.getPx()<player.getX()+player.getIcon().getIconWidth()) && 
+            		(k.getPy()>player.getY()&&player.getY()+player.getIcon().getIconHeight()>k.getPy()))
             {
                 lives1--;
+                
 				if (lives1==0) 
 				{
 					//파일 저장
+					File file=new File("C:/Users/user/Desktop/JAVASCORE.txt");
                 	try 
                 	{
-                		FileOutputStream output = new FileOutputStream("C:/Users/이준원/Desktop/JAVASCORE");
-                		String str = Integer.toString(nscore);
-                		byte[] by = str.getBytes();
-                		output.write(by);
-                		output.close();
+                		FileWriter fw= new FileWriter(file,true);
+                		fw.write(Integer.toString(nscore));
+                		fw.close();
                 	}
-                	catch(Exception e){
-                		e.getStackTrace();
+                	catch(IOException e){
+                		e.printStackTrace();
                 	}
 					JLabel a=new JLabel();
                 	a.setSize(100,100);
@@ -120,7 +125,7 @@ public class main {
 				}
             }
             
-        //점수 증가시키는거     
+        //점수 증가시키    
 		if(k.getPy()>550) 
 		{
 			bulI.remove(k);
@@ -131,6 +136,7 @@ public class main {
 
 	}
 		
+		//라벨 리스트에 라벨 생성
 		for(bullet k : bulI)//BulI에 있는 값들을 하나식 bullet k에 대입
 		{
 			bulJ.add(new JLabel(k.getImg()));
@@ -140,16 +146,22 @@ public class main {
 			labelc++;
 			k.setPy(k.getPy()+k.getSpeed());
 		}
+		
 		player.setSize(p.getIconWidth(), p.getIconHeight());
 		player.setBounds(px, py, p.getIconWidth(), p.getIconHeight());
+		
 		lives.setText("life : "+Integer.toString(lives1));
 		f.add(lives);
 		f.add(player);
 		f.setVisible(true);//생성
+		
+		//화면 더러워서 지우기
 		f.revalidate();
 		f.repaint();
+		//0.05초 잠시 대기 
 		Thread.sleep(50);
 		sec++;
+		
 		for(JLabel k : bulJ)
 		{
 			f.remove(k);
@@ -157,10 +169,12 @@ public class main {
 		f.remove(player);
 	}
     }
+    
 	private static String integerate(int nscore2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	private static String string(int nscore2) {
 		// TODO Auto-generated method stub
 		return null;
