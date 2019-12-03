@@ -1,5 +1,6 @@
-package project;
+package 플젝;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.FileOutputStream;
@@ -18,9 +19,9 @@ public class main {
    
    private static ArrayList<dn> myArrayList;
    
-    public static void main(String[] args) throws InterruptedException {
+   public static void main(String[] args) throws InterruptedException {
    JFrame f = new JFrame("준's 게임 ");
-
+   f.getContentPane().setBackground(Color.YELLOW);
    ImageIcon p =new ImageIcon("C:/Users/이준원/Desktop/grr.png");
    
    JLabel player =  new JLabel(p);
@@ -134,6 +135,9 @@ public class main {
                    f.repaint();
                    Thread.sleep(100000); 
             }
+            //닿으면 총알 사라지게
+            bulI.remove(k);
+            break;
             }
             
        //점수 증가시키기
@@ -162,6 +166,7 @@ public class main {
       player.setBounds(px, py, p.getIconWidth(), p.getIconHeight());
       
       lives.setText("life : "+Integer.toString(lives1));
+      lives.setBounds(530,-190,350,500);
       f.add(lives);
       f.add(player);
       f.setVisible(true);//생성
